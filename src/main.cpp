@@ -32,7 +32,7 @@ void setup()
 {
      Serial.begin(9600);  // arduino serial
      Serial1.begin(9600); // onboard gps serial
-     Serial2.begin(9600); // blynk serial
+     Serial2.begin(9600); // bluetooth serial
 
      compass.init();                                               // initialize compass
      compass.setMode(Mode_Continuous, ODR_200Hz, RNG_2G, OSR_256); // set compass mode
