@@ -172,7 +172,7 @@ void loop()
 
           float dist = distance(onboardLocation, mobileLocation);
 
-          if(dist <= 1)
+          if(dist <= 1.5)
           {
                robot.Stop();
           }
