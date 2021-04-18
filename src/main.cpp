@@ -41,7 +41,7 @@ void setup()
 
      distanceMsg = "0m";
 
-     Blynk.virtualWrite(V3, "clr");
+     terminal.clear();
 
      robot.setSpeed(200);
      robot.Stop();
