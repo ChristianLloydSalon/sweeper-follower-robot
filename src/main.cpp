@@ -174,7 +174,7 @@ void loop()
 
           if(dist <= 1)
           {
-               // stop
+               robot.Stop();
           }
           else if (headingAngle == bearingAngle)
           {
