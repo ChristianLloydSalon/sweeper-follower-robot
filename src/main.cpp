@@ -11,7 +11,8 @@ TinyGPS onboardGPS;
 MechaQMC5883 compass;
 RobotMotion robot(2, 22, 23, 3, 24, 25);
 
-WidgetTerminal terminal(V3);
+WidgetTerminal terminal1(V3);
+WidgetTerminal terminal2(V4);
 
 struct GeoLocation
 {
@@ -41,10 +42,32 @@ void setup()
 
      distanceMsg = "0m";
 
-     terminal.clear();
+     terminal1.clear();
 
      robot.setSpeed(200);
      robot.Stop();
+}
+
+// overload != operator
+bool operator!=(GeoLocation location, int num)
+{
+     if (location.latitude != num && location.longitude != num)
+          return true;
+
+     return false;
+}
+
+void displayGPSValues(String text, GeoLocation location, WidgetTerminal &terminal)
+{
+     if(location != 0)
+     {
+          terminal.println(location.latitude, 10);
+          terminal.println(location.longitude, 10);
+     }
+     else
+     {
+          terminal.println("Initializing " + text + "....");
+     }
 }
 
 // Mobile GPS Stream
@@ -54,8 +77,6 @@ BLYNK_WRITE(V0)
 
      mobileLocation.latitude = mobileGPS.getLat();
      mobileLocation.longitude = mobileGPS.getLon();
-
-     Serial.println(mobileLocation.latitude, 10);
 }
 
 // Killswitch
@@ -66,22 +87,16 @@ BLYNK_WRITE(V1)
 // DISPLAY DISTANCE AND TERMINAL
 BLYNK_READ(V2)
 {
-     terminal.clear();
+     terminal1.clear();
+     terminal2.clear();
 
      Blynk.virtualWrite(V2, distanceMsg);
 
-     if (onboardLocation.latitude != 0 && onboardLocation.longitude != 0)
-     {
-          terminal.println("Onboard GPS:");
-          terminal.println(onboardLocation.latitude, 10);
-          terminal.println(onboardLocation.longitude, 10);
-     }
-     else
-     {
-          terminal.println("Initializing Onboard GPS...");
-     }
+     displayGPSValues("Onboard GPS", onboardLocation, terminal1);
+     displayGPSValues("Mobile GPS", mobileLocation, terminal2);
 
-     terminal.flush();
+     terminal1.flush();
+     terminal2.flush();
 }
 
 // bearing angle of A with respect to B
@@ -132,15 +147,6 @@ float distance(GeoLocation A, GeoLocation B)
      float y = 2 * atan2(sqrt(x), sqrt(1 - x));
 
      return R * y;
-}
-
-// overload != operator
-bool operator!=(GeoLocation location, int num)
-{
-     if (location.latitude != num && location.longitude != num)
-          return true;
-
-     return false;
 }
 
 void loop()
