@@ -127,14 +127,14 @@ float bearing(GeoLocation A, GeoLocation B)
 // heading degrees of the robot from the north
 float heading()
 {
-     float headingDegrees;
+     float _heading;
      int x, y, z;
 
      compass.read(&x, &y, &z);
 
-     headingDegrees = compass.azimuth(&y, &x);
+     _heading = compass.azimuth(&y, &x);
 
-     return headingDegrees;
+     return _heading;
 }
 
 // get distance between two points using Harvensine's formula
