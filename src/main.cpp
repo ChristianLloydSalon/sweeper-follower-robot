@@ -81,17 +81,6 @@ BLYNK_READ(V2)
           terminal.println("Initializing Onboard GPS...");
      }
 
-     if (mobileLocation.latitude != 0 && mobileLocation.longitude != 0)
-     {
-          terminal.println("Mobile GPS:");
-          terminal.println(mobileLocation.latitude);
-          terminal.println(mobileLocation.longitude);
-     }
-     else
-     {
-          terminal.println("Initializing Mobile GPS...");
-     }
-
      terminal.flush();
 }
 
