@@ -25,7 +25,7 @@ GeoLocation onboardLocation;
 // Mobile Phone GPS location
 GeoLocation mobileLocation;
 
-String statusMsg;
+String distanceMsg;
 
 void setup()
 {
@@ -38,7 +38,7 @@ void setup()
 
      Blynk.begin(Serial2, authenticationKey); // initialize Blynk
 
-     statusMsg = "Bluetooth Connected";
+     distanceMsg = "0m";
 
      Blynk.virtualWrite(V3, "clr");
 
@@ -61,12 +61,12 @@ BLYNK_WRITE(V1)
 {
 }
 
-// DISPLAY STATUS AND TO TERMINAL
+// DISPLAY DISTANCE AND TO TERMINAL
 BLYNK_READ(V2)
 {
      terminal.clear();
 
-     Blynk.virtualWrite(V2, statusMsg);
+     Blynk.virtualWrite(V2, distanceMsg);
 
      if (onboardLocation.latitude != 0 && onboardLocation.longitude != 0)
      {
@@ -171,6 +171,8 @@ void loop()
           int headingAngle = (int)heading();
 
           float dist = distance(onboardLocation, mobileLocation);
+
+          distanceMsg = String(dist) + "m";
 
           if(dist <= 1.5)
           {
