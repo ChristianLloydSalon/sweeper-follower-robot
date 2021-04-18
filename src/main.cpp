@@ -140,8 +140,8 @@ float distance(GeoLocation A, GeoLocation B)
      float dp = (B.latitude - A.latitude) * DEG_TO_RAD;
      float dl = (A.longitude - B.longitude) * DEG_TO_RAD;
 
-     float x = pow(sin(dp / 2), 2) * 
-               sin(dp / 2) + cos(p1) * cos(p2) * 
+     float x = pow(sin(dp / 2), 2) + 
+               cos(p1) * cos(p2) * 
                pow(sin(dl / 2), 2);
 
      float y = 2 * atan2(sqrt(x), sqrt(1 - x));
