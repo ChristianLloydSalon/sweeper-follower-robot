@@ -182,7 +182,13 @@ void loop()
           }
           else if (headingAngle < bearingAngle)
           {
-               // do something
+               int RIGHT = headingAngle - bearingAngle;
+               int LEFT = 360 - RIGHT;
+
+               if(RIGHT < LEFT)
+                    robot.Right();
+               else
+                    robot.Left();
           }
           else if (headingAngle > bearingAngle)
           {
