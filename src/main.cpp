@@ -178,7 +178,7 @@ void loop()
           }
           else if (headingAngle == bearingAngle)
           {
-               // forward
+               robot.Forward();
           }
           else if (headingAngle < bearingAngle)
           {
