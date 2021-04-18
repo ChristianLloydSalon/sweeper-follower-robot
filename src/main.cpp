@@ -140,7 +140,7 @@ float heading()
 // get distance between two points using Harvensine's formula
 float distance(GeoLocation A, GeoLocation B)
 {
-     const float R = 6371000;                // Earth's radius (km)
+     const float R = 6371000; // Earth's radius (km)
      float p1 = A.latitude * DEG_TO_RAD;
      float p2 = B.latitude * DEG_TO_RAD;
      float dp = (B.latitude - A.latitude) * DEG_TO_RAD;
