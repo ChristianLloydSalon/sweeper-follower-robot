@@ -25,6 +25,7 @@ GeoLocation onboardLocation;
 // Mobile Phone GPS location
 GeoLocation mobileLocation;
 
+// distance message
 String distanceMsg;
 
 void setup()
