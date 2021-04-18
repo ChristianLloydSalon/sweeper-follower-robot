@@ -82,6 +82,12 @@ BLYNK_WRITE(V0)
 // Killswitch
 BLYNK_WRITE(V1)
 {
+     int buttonState = param.asInt();
+
+     if(buttonState == 0)
+          robot.Stop();
+     else
+          robot.Forward();
 }
 
 // DISPLAY DISTANCE AND TERMINAL
