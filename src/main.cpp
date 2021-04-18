@@ -43,6 +43,7 @@ void setup()
      Blynk.virtualWrite(V3, "clr");
 
      robot.setSpeed(200);
+     robot.Stop();
 }
 
 // Mobile GPS Stream
