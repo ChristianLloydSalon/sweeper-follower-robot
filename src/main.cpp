@@ -9,7 +9,7 @@ char authenticationKey[] = "vWVJ8YZeHavp5iXS4U2eBT1rOrop_azE";
 
 TinyGPS onboardGPS;
 MechaQMC5883 compass;
-RobotMotion robot(1, 2, 3, 4, 5, 6);
+RobotMotion robot(2, 22, 23, 3, 24, 25);
 
 WidgetTerminal terminal(V3);
 
