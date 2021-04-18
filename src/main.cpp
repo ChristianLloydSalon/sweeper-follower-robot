@@ -41,6 +41,8 @@ void setup()
      statusMsg = "Bluetooth Connected";
 
      Blynk.virtualWrite(V3, "clr");
+
+     robot.setSpeed(200);
 }
 
 // Mobile GPS Stream
