@@ -23,7 +23,8 @@
                 "C:/Users/user/.platformio/packages/framework-arduino-avr/libraries/HID/src",
                 "C:/Users/user/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
                 "C:/Users/user/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
-                ""
+                "",
+                "${workspaceFolder}/.pio/libdeps/megaatmega2560/TinyGPSPlus/src"
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
