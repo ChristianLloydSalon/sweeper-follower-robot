@@ -195,7 +195,7 @@ void loop()
           }
           else if (headingAngle < bearingAngle)
           {
-               int RIGHT = headingAngle - bearingAngle;
+               int RIGHT = bearingAngle - headingAngle;
                int LEFT = 360 - RIGHT;
 
                if(RIGHT < LEFT)
