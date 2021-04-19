@@ -193,8 +193,7 @@ void loop()
 
           distanceMsg = String(dist) + "m";
 
-          // the robot stops when the distance between the mobile phone and the robot is <= to 1.5
-          if(dist <= 1.5)
+          if(dist <= 1.5 || getUltrasonicDistance() <= 1)
           {
                robot.Stop();
           }
