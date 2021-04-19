@@ -146,7 +146,7 @@ float heading()
      return _heading;
 }
 
-// get distance between two points using Harvensine's formula
+// get distance between two points using Havensine's formula
 float distance(GeoLocation A, GeoLocation B)
 {
      const float R = 6371000; // Earth's radius (km)
