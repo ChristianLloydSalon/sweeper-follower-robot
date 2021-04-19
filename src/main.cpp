@@ -51,6 +51,7 @@ void setup()
      distanceMsg = "0m";
 
      terminal1.clear();
+     terminal2.clear();
 
      robot.setSpeed(200);
      robot.Stop();
@@ -184,7 +185,7 @@ void loop()
           float dist = distance(onboardLocation, mobileLocation);
 
           distanceMsg = String(dist) + "m";
-          
+
           if(dist <= 1.5)
           {
                robot.Stop();
