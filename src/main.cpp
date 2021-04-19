@@ -10,6 +10,7 @@
 char authenticationKey[] = "vWVJ8YZeHavp5iXS4U2eBT1rOrop_azE";
 
 TinyGPS onboardGPS;
+TinyGPSPlus onboardGPSPlus;
 MechaQMC5883 compass;
 
 // ENA - PIN2
