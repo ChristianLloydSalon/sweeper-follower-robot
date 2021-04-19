@@ -117,7 +117,7 @@ BLYNK_READ(V2)
 // bearing angle of A with respect to B
 float bearing(GeoLocation A, GeoLocation B)
 {
-     float deltaL = abs(A.longitude - B.longitude);
+     float deltaL = B.longitude - A.longitude;
 
      float cosA = cos(A.latitude * DEG_TO_RAD);
      float cosB = cos(B.latitude * DEG_TO_RAD);
@@ -186,6 +186,7 @@ void loop()
 
           distanceMsg = String(dist) + "m";
 
+          // the robot stops when the distance between the mobile phone and the robot is <= to 1.5
           if(dist <= 1.5)
           {
                robot.Stop();
