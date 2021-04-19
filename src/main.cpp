@@ -165,6 +165,12 @@ float distance(GeoLocation A, GeoLocation B)
      return R * y;
 }
 
+// gets the ultrasonic readings
+float getUltrasonicDistance()
+{
+     return 0;
+}
+
 void loop()
 {
      Blynk.run();
