@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <TinyGPS.h>
+#include <TinyGPS++.h>
 #include <MechaQMC5883.h>
 #include <BlynkSimpleSerialBLE.h>
 #include <RobotMotion.h>
