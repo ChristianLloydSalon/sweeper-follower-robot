@@ -55,7 +55,7 @@ void setup()
      terminal1.clear();
      terminal2.clear();
 
-     robot.setSpeed(200);
+     robot.setSpeed(255);
      robot.Stop();
 }
 
@@ -179,15 +179,10 @@ void loop()
           {
                // get robot latitude and longitude
                onboardGPS.f_get_position(&onboardLocation.latitude, &onboardLocation.longitude);
-               
-               // onboardLocation.latitude = onboardGPS.location.lat();
-               // onboardLocation.longitude = onboardGPS.location.lng();
-               // Serial.print("Latitude="); Serial.print(onboardGPS.location.lat(), 6);
-               // Serial.print("Longitude="); Serial.println(onboardGPS.location.lng(), 6);
           }
      }
 
-     if (onboardLocation != 0 && mobileLocation != 0)
+     if (onboardLocation != 0 && mobileLocation != 0 && enabled)
      {
           int bearingAngle = (int)bearing(onboardLocation, mobileLocation);
           int headingAngle = (int)heading();
@@ -200,11 +195,11 @@ void loop()
           {
                robot.Stop();
           }
-          else if (headingAngle == bearingAngle && enabled)
+          else if (headingAngle == bearingAngle)
           {
                robot.Forward();
           }
-          else if (headingAngle < bearingAngle && enabled)
+          else if (headingAngle < bearingAngle)
           {
                int RIGHT = bearingAngle - headingAngle;
                int LEFT = 360 - RIGHT;
@@ -214,7 +209,7 @@ void loop()
                else
                     robot.Left();
           }
-          else if (headingAngle > bearingAngle && enabled)
+          else if (headingAngle > bearingAngle)
           {
                int LEFT = headingAngle - bearingAngle;
                int RIGHT = 360 - LEFT;
@@ -224,5 +219,9 @@ void loop()
                else
                     robot.Right();
           }
+     }
+     else
+     {
+          robot.Stop();
      }
 }
