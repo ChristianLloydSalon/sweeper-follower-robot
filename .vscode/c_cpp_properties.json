@@ -12,7 +12,6 @@
                 "C:/Users/user/Documents/PlatformIO/Projects/Sweeper Follower Robot/src",
                 "C:/Users/user/Documents/PlatformIO/Projects/Sweeper Follower Robot/lib/RobotMotion",
                 "C:/Users/user/Documents/PlatformIO/Projects/Sweeper Follower Robot/lib/Mecha_QMC5883L",
-                "C:/Users/user/Documents/PlatformIO/Projects/Sweeper Follower Robot/.pio/libdeps/megaatmega2560/TinyGPSPlus/src",
                 "C:/Users/user/Documents/PlatformIO/Projects/Sweeper Follower Robot/.pio/libdeps/megaatmega2560/Blynk/src",
                 "C:/Users/user/Documents/PlatformIO/Projects/Sweeper Follower Robot/.pio/libdeps/megaatmega2560/Adafruit HMC5883 Unified",
                 "C:/Users/user/Documents/PlatformIO/Projects/Sweeper Follower Robot/.pio/libdeps/megaatmega2560/Adafruit Unified Sensor",
@@ -24,7 +23,8 @@
                 "C:/Users/user/.platformio/packages/framework-arduino-avr/libraries/HID/src",
                 "C:/Users/user/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
                 "C:/Users/user/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
-                ""
+                "",
+                "${workspaceFolder}/.pio/libdeps/megaatmega2560/NewPing/src"
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
@@ -33,7 +33,6 @@
                     "C:/Users/user/Documents/PlatformIO/Projects/Sweeper Follower Robot/src",
                     "C:/Users/user/Documents/PlatformIO/Projects/Sweeper Follower Robot/lib/RobotMotion",
                     "C:/Users/user/Documents/PlatformIO/Projects/Sweeper Follower Robot/lib/Mecha_QMC5883L",
-                    "C:/Users/user/Documents/PlatformIO/Projects/Sweeper Follower Robot/.pio/libdeps/megaatmega2560/TinyGPSPlus/src",
                     "C:/Users/user/Documents/PlatformIO/Projects/Sweeper Follower Robot/.pio/libdeps/megaatmega2560/Blynk/src",
                     "C:/Users/user/Documents/PlatformIO/Projects/Sweeper Follower Robot/.pio/libdeps/megaatmega2560/Adafruit HMC5883 Unified",
                     "C:/Users/user/Documents/PlatformIO/Projects/Sweeper Follower Robot/.pio/libdeps/megaatmega2560/Adafruit Unified Sensor",
