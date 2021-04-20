@@ -1,7 +1,7 @@
 # Sweeper Follower Robot
 A robot with a garbage can that follows a street sweeper
 
-# Components Used
+# Electronic Components Used
 * HC-05 Bluetooth Module
 * NEO 6m GPS Module
 * HMC5883L Compass
