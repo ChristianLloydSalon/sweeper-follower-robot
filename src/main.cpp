@@ -191,7 +191,7 @@ void loop()
 
           distanceMsg = String(dist) + "m";
 
-          if(dist <= 4 || getUltrasonicDistance() <= 1)
+          if(dist <= 3 || getUltrasonicDistance() <= 1)
           {
                robot.Stop();
           }
