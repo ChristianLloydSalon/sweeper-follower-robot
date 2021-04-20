@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <TinyGPS.h>
-#include <TinyGPS++.h>
 #include <MechaQMC5883.h>
 #include <BlynkSimpleSerialBLE.h>
 #include <RobotMotion.h>
@@ -23,7 +22,7 @@ RobotMotion robot(2, 22, 23, 3, 24, 25);
 WidgetTerminal terminal1(V3);
 WidgetTerminal terminal2(V4);
 
-bool enable = false;
+bool enabled = false;
 
 struct GeoLocation
 {
@@ -94,7 +93,7 @@ BLYNK_WRITE(V0)
 // Killswitch
 BLYNK_WRITE(V1)
 {
-     enable = !enable;
+     enabled = !enabled;
 
      robot.Stop();
 }
@@ -201,11 +200,11 @@ void loop()
           {
                robot.Stop();
           }
-          else if (headingAngle == bearingAngle && enable)
+          else if (headingAngle == bearingAngle && enabled)
           {
                robot.Forward();
           }
-          else if (headingAngle < bearingAngle && enable)
+          else if (headingAngle < bearingAngle && enabled)
           {
                int RIGHT = bearingAngle - headingAngle;
                int LEFT = 360 - RIGHT;
@@ -215,7 +214,7 @@ void loop()
                else
                     robot.Left();
           }
-          else if (headingAngle > bearingAngle && enable)
+          else if (headingAngle > bearingAngle && enabled)
           {
                int LEFT = headingAngle - bearingAngle;
                int RIGHT = 360 - LEFT;
