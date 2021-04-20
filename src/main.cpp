@@ -11,7 +11,7 @@
 #endif
 
 #ifndef MIN_ULTRASONIC_DISTANCE
-#define MIN_ULTRASONIC_DISTANCE 1
+#define MIN_ULTRASONIC_DISTANCE 12
 #endif
 
 #ifndef ECHO_PIN
