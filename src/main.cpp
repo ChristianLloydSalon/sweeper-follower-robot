@@ -23,6 +23,8 @@ RobotMotion robot(2, 22, 23, 3, 24, 25);
 WidgetTerminal terminal1(V3);
 WidgetTerminal terminal2(V4);
 
+bool enable = false;
+
 struct GeoLocation
 {
      float latitude;
@@ -92,12 +94,9 @@ BLYNK_WRITE(V0)
 // Killswitch
 BLYNK_WRITE(V1)
 {
-     int buttonState = param.asInt();
+     enable = !enable;
 
-     if(buttonState == 0)
-          robot.Stop();
-     else
-          robot.Forward();
+     robot.Stop();
 }
 
 // DISPLAY DISTANCE AND TERMINAL
@@ -202,11 +201,11 @@ void loop()
           {
                robot.Stop();
           }
-          else if (headingAngle == bearingAngle)
+          else if (headingAngle == bearingAngle && enable)
           {
                robot.Forward();
           }
-          else if (headingAngle < bearingAngle)
+          else if (headingAngle < bearingAngle && enable)
           {
                int RIGHT = bearingAngle - headingAngle;
                int LEFT = 360 - RIGHT;
@@ -216,7 +215,7 @@ void loop()
                else
                     robot.Left();
           }
-          else if (headingAngle > bearingAngle)
+          else if (headingAngle > bearingAngle && enable)
           {
                int LEFT = headingAngle - bearingAngle;
                int RIGHT = 360 - LEFT;
