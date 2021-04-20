@@ -195,11 +195,11 @@ void loop()
           int bearingAngle = (int)bearing(onboardLocation, mobileLocation);
           int headingAngle = (int)heading();
 
-          float dist = distance(onboardLocation, mobileLocation);
+          float _distance = distance(onboardLocation, mobileLocation);
 
-          distanceMsg = String(dist) + "m";
+          distanceMsg = String(_distance) + "m";
 
-          if(dist <= MIN_GPS_DISTANCE || getUltrasonicDistance() <= MIN_ULTRASONIC_DISTANCE)
+          if(_distance <= MIN_GPS_DISTANCE || getUltrasonicDistance() <= MIN_ULTRASONIC_DISTANCE)
           {
                robot.Stop();
           }
