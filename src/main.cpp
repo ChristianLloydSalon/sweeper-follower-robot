@@ -210,6 +210,8 @@ void loop()
 {
      Blynk.run();
 
+     float ultrasonicReading = getUltrasonicDistance();     // get ultrasonic value (cm)
+
      if (Serial1.available())
      {
           if (onboardGPS.encode(Serial1.read()))
@@ -228,7 +230,7 @@ void loop()
 
           distanceMsg = String(_distance) + "m";
 
-          if (_distance <= MIN_GPS_DISTANCE || getUltrasonicDistance() <= MIN_ULTRASONIC_DISTANCE)
+          if (_distance <= MIN_GPS_DISTANCE || ultrasonicReading <= MIN_ULTRASONIC_DISTANCE)
           {
                robot.Stop();
           }
