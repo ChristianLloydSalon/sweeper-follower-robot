@@ -190,7 +190,7 @@ float distance(GeoLocation A, GeoLocation B)
      return R * y;
 }
 
-// gets the ultrasonic readings
+// gets the ultrasonic readings (cm)
 float getUltrasonicDistance()
 {
      const int period = 50;        // 50ms
