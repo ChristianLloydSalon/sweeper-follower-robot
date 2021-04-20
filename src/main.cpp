@@ -10,7 +10,6 @@
 char authenticationKey[] = "vWVJ8YZeHavp5iXS4U2eBT1rOrop_azE";
 
 TinyGPS onboardGPS;
-TinyGPSPlus onboardGPSPlus;
 MechaQMC5883 compass;
 
 // ENA - PIN2
@@ -182,6 +181,11 @@ void loop()
           {
                // get robot latitude and longitude
                onboardGPS.f_get_position(&onboardLocation.latitude, &onboardLocation.longitude);
+               
+               // onboardLocation.latitude = onboardGPS.location.lat();
+               // onboardLocation.longitude = onboardGPS.location.lng();
+               // Serial.print("Latitude="); Serial.print(onboardGPS.location.lat(), 6);
+               // Serial.print("Longitude="); Serial.println(onboardGPS.location.lng(), 6);
           }
      }
 
@@ -194,7 +198,7 @@ void loop()
 
           distanceMsg = String(dist) + "m";
 
-          if(dist <= 1.5 || getUltrasonicDistance() <= 1)
+          if(dist <= 4 || getUltrasonicDistance() <= 1)
           {
                robot.Stop();
           }
