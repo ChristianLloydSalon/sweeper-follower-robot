@@ -16,6 +16,8 @@ class RobotMotion
         int IN3;
         int IN4;
 
+        int speed;
+
     public:
         RobotMotion(int ENA, int IN1, int IN2, int ENB, int IN3, int IN4);
 

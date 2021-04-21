@@ -23,7 +23,8 @@ void RobotMotion::setSpeed(int speed)
         speed = 255;
     else if(speed < 0)
         speed = 0;
-        
+    
+    this->speed = speed;
     analogWrite(ENA, speed);
     analogWrite(ENB, speed);
 }
@@ -54,16 +55,24 @@ void RobotMotion::Backward()
 
 void RobotMotion::Left()
 {
+    setSpeed(speed / 2);
+
     digitalWrite(IN1, HIGH);
     digitalWrite(IN2, LOW);
     digitalWrite(IN3, LOW);
     digitalWrite(IN4, HIGH);
+
+    setSpeed(speed);
 }
 
 void RobotMotion::Right()
 {
+    setSpeed(speed / 2);
+
     digitalWrite(IN1, LOW);
     digitalWrite(IN2, HIGH);
     digitalWrite(IN3, HIGH);
     digitalWrite(IN4, LOW);
+
+    setSpeed(speed);
 }
