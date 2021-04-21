@@ -65,6 +65,8 @@ String distanceMsg;
 
 void setup()
 {
+     Wire.begin();
+     
      Serial.begin(9600);  // arduino serial
      Serial1.begin(9600); // onboard gps serial
      Serial2.begin(9600); // bluetooth serial
