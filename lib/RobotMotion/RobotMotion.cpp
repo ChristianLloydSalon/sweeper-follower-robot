@@ -55,7 +55,7 @@ void RobotMotion::Backward()
 
 void RobotMotion::Left()
 {
-    setSpeed(speed / 2);
+    setSpeed((int)(speed * 0.5));
 
     digitalWrite(IN1, HIGH);
     digitalWrite(IN2, LOW);
@@ -67,7 +67,7 @@ void RobotMotion::Left()
 
 void RobotMotion::Right()
 {
-    setSpeed(speed / 2);
+    setSpeed((int)(speed * 0.5));
 
     digitalWrite(IN1, LOW);
     digitalWrite(IN2, HIGH);
