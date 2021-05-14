@@ -182,7 +182,7 @@ float bearing(GeoLocation A, GeoLocation B)
      return bearing;
 }
 
-// heading degrees of the robot from the north
+// heading degrees of the robot
 float heading()
 {
      sensors_event_t event; 
