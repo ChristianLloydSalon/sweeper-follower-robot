@@ -8,7 +8,7 @@
 #include <BlynkSimpleSerialBLE.h>
 
 #ifndef MIN_GPS_DISTANCE
-#define MIN_GPS_DISTANCE 3    
+#define MIN_GPS_DISTANCE 1.5    
 #endif
 
 #ifndef MIN_ULTRASONIC_DISTANCE
@@ -28,7 +28,7 @@
 #endif
 
 #ifndef GPS_INTERVAL
-#define GPS_INTERVAL 4000
+#define GPS_INTERVAL 1000
 #endif
 
 #ifndef ULTRASONIC_INTERVAL 
@@ -53,7 +53,6 @@ RobotMotion robot(2, 22, 23, 3, 24, 25);
 NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_PING_DISTANCE);
 
 WidgetTerminal terminal1(V3);
-WidgetTerminal terminal2(V4);
 
 bool enabled = false;
 
@@ -70,9 +69,8 @@ GeoLocation onboardLocation;
 GeoLocation mobileLocation;
 
 // distance message
-String distanceMsg;
+float distanceMsg;
 
-unsigned long time_now = 0;
 unsigned long gps_time_now = 0;
 
 float bearingAngle = 0;
@@ -93,16 +91,17 @@ void setup()
 
      Blynk.begin(Serial2, authenticationKey); // initialize Blynk
 
-     distanceMsg = "0m";
+     distanceMsg = 0;
 
      pinMode(TRIGGER_PIN, OUTPUT); // Sets the TRIGGER_PIN as an OUTPUT
      pinMode(ECHO_PIN, INPUT);     // Sets the ECHO_PIN as an INPUT
 
      terminal1.clear();
-     terminal2.clear();
 
-     robot.setSpeed(100);
+     robot.setSpeed(255);
      robot.Stop();
+
+     gps_time_now = millis();
 }
 
 // overload != operator
@@ -118,8 +117,10 @@ void displayGPSValues(String text, GeoLocation location, WidgetTerminal &termina
 {
      if (location != 0)
      {
-          terminal.println(location.latitude, 10);
-          terminal.println(location.longitude, 10);
+          terminal.print("Lat: ");
+          terminal.println(location.latitude, 4);
+          terminal.print("Lon: ");
+          terminal.println(location.longitude, 4);
      }
      else
      {
@@ -150,17 +151,15 @@ BLYNK_READ(V2)
      Blynk.virtualWrite(V2, distanceMsg);
 
      terminal1.clear();
-     terminal2.clear();
 
      displayGPSValues("Onboard GPS", onboardLocation, terminal1);
 
+     terminal1.print("B: ");
      terminal1.println(bearingAngle);
+     terminal1.print("H: ");
      terminal1.println(headingAngle);
 
-     displayGPSValues("Mobile Phone GPS", mobileLocation, terminal2);
-
      terminal1.flush();
-     terminal2.flush();
 }
 
 // bearing angle of A with respect to B
@@ -193,9 +192,9 @@ float heading()
      float heading = atan2(event.magnetic.y, event.magnetic.x);
      
      // Once you have your heading, you must then add your 'Declination Angle', which is the 'Error' of the magnetic field in your location.
-     float declinationAngle = 0.02;
-     heading += declinationAngle;
-     
+     float declinationAngle = (-1 + (35/60)) / (180/M_PI);
+     heading -= declinationAngle;
+
      // Correct for when signs are reversed.
      if(heading < 0)
           heading += 2*PI;
@@ -205,7 +204,7 @@ float heading()
           heading -= 2*PI;
      
      // Convert radians to degrees for readability.
-     float headingDegrees = heading * 180/M_PI; 
+     float headingDegrees = heading * 180/M_PI;
 
      return headingDegrees;
 }
@@ -255,7 +254,7 @@ void loop()
 
      if(millis() >= gps_time_now + GPS_INTERVAL)
      {
-          Serial.println(heading());
+          Serial.println("OK");
           gps_time_now += GPS_INTERVAL;
 
           onboardLocation.latitude = latitude;
@@ -269,18 +268,20 @@ void loop()
 
           float gpsDistance = distance(onboardLocation, mobileLocation);
           
-          distanceMsg = String(gpsDistance) + "m";
+          distanceMsg = gpsDistance;
 
           bool isArrived = (gpsDistance <= MIN_GPS_DISTANCE);
-          bool isObstacleDetected = (ultrasonicReading <= MIN_ULTRASONIC_DISTANCE);
+          bool isObstacleDetected = (ultrasonicReading <= MIN_ULTRASONIC_DISTANCE) && ultrasonicReading != 0;
           bool isForward = (headingAngle <= bearingAngle + 3) && (headingAngle >= bearingAngle - 3);
           
           if((isForward && isObstacleDetected) || isArrived)
           {
+               Serial.println("Stop");
                robot.Stop();
           }
           else if(isForward && !isObstacleDetected && !isArrived)
           {
+               robot.Stop();
                robot.Forward();
           }
           else if (headingAngle < bearingAngle)
@@ -289,9 +290,15 @@ void loop()
                int LEFT = 360 - RIGHT;
 
                if (RIGHT < LEFT)
+               {
+                    Serial.println("A Right");
                     robot.Right();
+               }
                else
+               {
+                    Serial.println("A Left");
                     robot.Left();
+               }
           }
           else if (headingAngle > bearingAngle)
           {
@@ -299,9 +306,15 @@ void loop()
                int RIGHT = 360 - LEFT;
 
                if (LEFT < RIGHT)
+               {
+                    Serial.println("B Left");
                     robot.Left();
+               }
                else
+                {
+                    Serial.println("B Right");
                     robot.Right();
+               }
           }
      }
      else
