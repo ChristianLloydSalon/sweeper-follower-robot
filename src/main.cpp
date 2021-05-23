@@ -242,6 +242,7 @@ void loop()
      Blynk.run();
      
      float ultrasonicReading = getUltrasonicDistance();     // get ultrasonic value (cm)
+     headingAngle = heading();
 
      if (Serial1.available())
      {
@@ -264,7 +265,6 @@ void loop()
      if (onboardLocation != 0 && mobileLocation != 0 && enabled)
      {
           bearingAngle = bearing(onboardLocation, mobileLocation);
-          headingAngle = heading();
 
           float gpsDistance = distance(onboardLocation, mobileLocation);
           
@@ -272,20 +272,24 @@ void loop()
 
           bool isArrived = (gpsDistance <= MIN_GPS_DISTANCE);
           bool isObstacleDetected = (ultrasonicReading <= MIN_ULTRASONIC_DISTANCE) && ultrasonicReading != 0;
-          bool isForward = (headingAngle <= bearingAngle + 3) && (headingAngle >= bearingAngle - 3);
+          bool isForward = (headingAngle <= bearingAngle + 5) && (headingAngle >= bearingAngle - 5);
           
           if((isForward && isObstacleDetected) || isArrived)
           {
+               robot.setSpeed(255);
                Serial.println("Stop");
                robot.Stop();
           }
           else if(isForward && !isObstacleDetected && !isArrived)
           {
+               robot.setSpeed(255);
                robot.Stop();
                robot.Forward();
           }
           else if (headingAngle < bearingAngle)
           {
+               robot.setSpeed(150);
+
                int RIGHT = bearingAngle - headingAngle;
                int LEFT = 360 - RIGHT;
 
@@ -302,6 +306,8 @@ void loop()
           }
           else if (headingAngle > bearingAngle)
           {
+               robot.setSpeed(150);
+
                int LEFT = headingAngle - bearingAngle;
                int RIGHT = 360 - LEFT;
 
