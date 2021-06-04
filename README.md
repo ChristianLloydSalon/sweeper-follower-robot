@@ -13,4 +13,4 @@ A robot with a garbage can that follows a street sweeper
 ![3D Design](https://github.com/ChristianLloydSalon/sweeper-follower-robot/blob/master/doc/robot-design.png)
 
 # Actual Design
-![Actual Design](https://github.com/ChristianLloydSalon/sweeper-follower-robot/blob/sweeper-follower-robot.png)
+![Actual Design](https://github.com/ChristianLloydSalon/sweeper-follower-robot/blob/master/sweeper-follower-robot.png)
